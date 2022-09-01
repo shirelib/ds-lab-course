@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Shirel Libersat &amp; Shalva Kvitelashvili">
+<meta name="dcterms.date" content="2022-09-01">
+
+<title>Lab in Data Science: Final Assignment</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="report_files/libs/clipboard/clipboard.min.js"></script>
+<script src="report_files/libs/quarto-html/quarto.js"></script>
+<script src="report_files/libs/quarto-html/popper.min.js"></script>
+<script src="report_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="report_files/libs/quarto-html/anchor.min.js"></script>
+<link href="report_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="report_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="report_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="report_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="report_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="report_files/libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of Contents</h2>
+   
+  <ul>
+  <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link active" data-scroll-target="#data-exploration">Data Exploration</a></li>
+  <li><a href="#feature-extraction" id="toc-feature-extraction" class="nav-link" data-scroll-target="#feature-extraction">Feature Extraction</a>
+  <ul class="collapse">
+  <li><a href="#simple-metrics" id="toc-simple-metrics" class="nav-link" data-scroll-target="#simple-metrics">Simple Metrics</a></li>
+  <li><a href="#sentiment-analysis" id="toc-sentiment-analysis" class="nav-link" data-scroll-target="#sentiment-analysis">Sentiment Analysis</a></li>
+  <li><a href="#media-reliability" id="toc-media-reliability" class="nav-link" data-scroll-target="#media-reliability">Media Reliability</a></li>
+  <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries">Dictionaries</a></li>
+  <li><a href="#word-embeddings" id="toc-word-embeddings" class="nav-link" data-scroll-target="#word-embeddings">Word Embeddings</a></li>
+  <li><a href="#summarizing-features" id="toc-summarizing-features" class="nav-link" data-scroll-target="#summarizing-features">Summarizing Features</a></li>
+  </ul></li>
+  <li><a href="#modeling" id="toc-modeling" class="nav-link" data-scroll-target="#modeling">Modeling</a>
+  <ul class="collapse">
+  <li><a href="#basic-features-random-forest-model" id="toc-basic-features-random-forest-model" class="nav-link" data-scroll-target="#basic-features-random-forest-model">Basic Features Random Forest Model</a>
+  <ul class="collapse">
+  <li><a href="#training" id="toc-training" class="nav-link" data-scroll-target="#training">Training</a></li>
+  </ul></li>
+  <li><a href="#advanced-features-random-forest-model" id="toc-advanced-features-random-forest-model" class="nav-link" data-scroll-target="#advanced-features-random-forest-model">Advanced Features Random Forest Model</a>
+  <ul class="collapse">
+  <li><a href="#training-1" id="toc-training-1" class="nav-link" data-scroll-target="#training-1">Training</a></li>
+  </ul></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a>
+  <ul class="collapse">
+  <li><a href="#tuning-proccess" id="toc-tuning-proccess" class="nav-link" data-scroll-target="#tuning-proccess">Tuning Proccess</a></li>
+  <li><a href="#feature-importance-with-shap-values" id="toc-feature-importance-with-shap-values" class="nav-link" data-scroll-target="#feature-importance-with-shap-values">Feature Importance with SHAP values</a></li>
+  <li><a href="#prediction-breakdown-with-shap-values" id="toc-prediction-breakdown-with-shap-values" class="nav-link" data-scroll-target="#prediction-breakdown-with-shap-values">Prediction Breakdown with SHAP values</a></li>
+  <li><a href="#predictions" id="toc-predictions" class="nav-link" data-scroll-target="#predictions">Predictions</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab in Data Science: Final Assignment</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Shirel Libersat &amp; Shalva Kvitelashvili </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 1, 2022</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+</header>
+
+<p>In this report, we outline the measures we took to complete the final assignment of the “Lab in Data Science” course.</p>
+<p>We were given a list of Twitter users with a <strong>misinformation score</strong>. We have been tasked with building a model for predicting this score for other Twitter users. Critically, we were only given the user ID, therefore we needed to come up with a list of features for the model that we thought would be helpful in predicting the <strong>misinformation score</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># bind data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/train.csv"</span>, <span class="at">col_types =</span> <span class="st">"c"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/test.csv"</span>, <span class="at">col_types =</span> <span class="st">"c"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>users <span class="ot">&lt;-</span> train <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="data-exploration" class="level3">
+<h3 class="anchored" data-anchor-id="data-exploration">Data Exploration</h3>
+<p>The whole dataset includes 1163 users. 930 of those users were supplied in the training dataset which comes with the attached target variable, as you can see in the following table.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">id</th>
+<th style="text-align: right;">score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">813286</td>
+<td style="text-align: right;">0.3425249</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">1339835893</td>
+<td style="text-align: right;">0.3413333</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">50055701</td>
+<td style="text-align: right;">0.4601942</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">33750798</td>
+<td style="text-align: right;">0.4613861</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19394188</td>
+<td style="text-align: right;">0.4250000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18906561</td>
+<td style="text-align: right;">0.4813953</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We have retrieved up to 200 tweets with the most exposure for each user, at the period between 2018-2022, which we thought would be the most relevant for the purpose of this task. This is because during that time period discussion on COVID19 were rampant, as well as the upcoming election in the US.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(academictwitteR)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># run the loop</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(users)) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  academictwitteR<span class="sc">::</span><span class="fu">get_all_tweets</span>(<span class="at">users =</span> users<span class="sc">$</span>id[i],</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                                <span class="at">start_tweets =</span> <span class="st">"2018-05-01T00:00:00Z"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                                <span class="at">end_tweets =</span> <span class="st">"2022-01-01T00:00:00Z"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                <span class="at">data_path =</span> <span class="st">"./tweets"</span>,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                <span class="at">n =</span> <span class="dv">300</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                                <span class="at">page_n =</span> <span class="dv">300</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                <span class="at">bind_tweets =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"progress:"</span>, i, <span class="st">"/"</span>, <span class="fu">nrow</span>(users)))</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># bind tweets</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>tweets <span class="ot">&lt;-</span> <span class="fu">bind_tweets</span>(<span class="at">data_path =</span> <span class="st">"./tweets"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>tweets_flat <span class="ot">&lt;-</span> jsonlite<span class="sc">::</span><span class="fu">flatten</span>(tweets)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>tweets_flat <span class="ot">&lt;-</span> tweets_flat <span class="sc">|&gt;</span> <span class="fu">distinct</span>(id, <span class="at">.keep_all =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># save rds</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(<span class="at">x =</span> tweets_flat, <span class="at">file =</span> <span class="st">"./data/tweets_raw_full.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Some accounts did not have any tweets from that time or were deleted, so we retreived older tweets. Also, some accounts did not have any original tweets from any period, so we resorted to using their retweets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pre Proccessing Downloaded tweets ----</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Read raw data</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>tweets_raw_full <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"./data/tweets_raw_full.rds"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Removing retweets</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>tweets_no_RT <span class="ot">&lt;-</span> tweets_raw_full <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(purrr<span class="sc">::</span><span class="fu">map</span>(tweets_raw_full<span class="sc">$</span>referenced_tweets, <span class="dv">1</span>) <span class="sc">!=</span> <span class="st">'retweeted'</span>) <span class="co"># or quoted/repiled to</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## count number of tweets after removal, filter users who have under 50 tweets left</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>tweet_no_rt_count <span class="ot">&lt;-</span> tweets_no_RT <span class="sc">|&gt;</span> </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author_id) <span class="sc">|&gt;</span> </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>tweets_count <span class="ot">&lt;-</span> tweets_raw_full <span class="sc">|&gt;</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author_id) <span class="sc">|&gt;</span> </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(tweet_no_rt_count, <span class="at">by =</span> <span class="st">"author_id"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n.y =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(n.y), <span class="dv">0</span>, n.y)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n.y <span class="sc">&lt;</span> <span class="dv">50</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## take all tweets of under 50 users</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>tweets_unfiltered_users <span class="ot">&lt;-</span> tweets_raw_full <span class="sc">|&gt;</span> <span class="fu">filter</span>(author_id <span class="sc">%in%</span> tweets_count<span class="sc">$</span>author_id)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Create the final tweets file:</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## take the no RT tweet df, bind with under 50 users, then take the top 200 tweets from every user</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>tweets_final <span class="ot">&lt;-</span> tweets_no_RT <span class="sc">|&gt;</span> </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(tweets_unfiltered_users) <span class="sc">|&gt;</span> </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">exposure =</span> public_metrics.like_count <span class="sc">+</span> public_metrics.retweet_count <span class="sc">+</span> public_metrics.reply_count) <span class="sc">|&gt;</span> </span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author_id) <span class="sc">|&gt;</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(<span class="at">n =</span> <span class="dv">200</span>, <span class="at">order_by =</span> <span class="fu">desc</span>(exposure)) <span class="sc">|&gt;</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(author_id)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(tweets_final, <span class="at">file =</span> <span class="st">"./data/tweets_final.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="feature-extraction" class="level3">
+<h3 class="anchored" data-anchor-id="feature-extraction">Feature Extraction</h3>
+<p>Most of the work required us extracting features from the tweets that we thought would be useful in predicting the misinformation score. In this part we will explain which features we created.</p>
+<section id="simple-metrics" class="level4">
+<h4 class="anchored" data-anchor-id="simple-metrics">Simple Metrics</h4>
+<p>The first features for our model are basic metrics that Twitter provides:</p>
+<ul>
+<li>No.&nbsp;of retweets</li>
+<li>No.&nbsp;of likes</li>
+<li>No.&nbsp;of entities in the tweet (as Twitter’s algorithm identifies)</li>
+<li>No.&nbsp;of URLs</li>
+<li>No.&nbsp;of mentions</li>
+<li>No.&nbsp;of hashtags</li>
+<li>No.&nbsp;of words</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature Engineering ----</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"./data/tweets_final.rds"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Basic Metrics ----</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="do">### Add new columns indicating no. of urls\mentions\hashtags</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="do">### note: using the purr package we map the length of the embedded df's.</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="do">### this is a workaround to return the number of rows in that df.</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span> </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_url =</span> <span class="fu">mean</span>(purrr<span class="sc">::</span><span class="fu">map_dbl</span>(entities.urls, length)),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_mention =</span> <span class="fu">mean</span>(purrr<span class="sc">::</span><span class="fu">map_dbl</span>(entities.mentions, length)),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_hashtag =</span> <span class="fu">mean</span>(purrr<span class="sc">::</span><span class="fu">map_dbl</span>(entities.hashtags, length))) <span class="sc">|&gt;</span> </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_url =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(n_url), <span class="at">yes =</span> <span class="dv">0</span>, <span class="at">no =</span> n_url),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_mention =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(n_mention), <span class="at">yes =</span> <span class="dv">0</span>, <span class="at">no =</span> n_mention),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_hashtag =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(n_hashtag), <span class="at">yes =</span> <span class="dv">0</span>, <span class="at">no =</span> n_hashtag)) <span class="sc">|&gt;</span> </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="do">### Add number of words and characters</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">n_entities =</span> <span class="fu">sapply</span>(purrr<span class="sc">::</span><span class="fu">map</span>(tweets_features<span class="sc">$</span>entities.annotations, <span class="dv">1</span>), length),</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">n_words =</span> <span class="fu">sapply</span>(text, <span class="cf">function</span>(s) stringr<span class="sc">::</span><span class="fu">str_count</span>(s, <span class="st">"</span><span class="sc">\\</span><span class="st">w+"</span>)) <span class="co"># letter/digit/underscore only</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="sentiment-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="sentiment-analysis">Sentiment Analysis</h4>
+<p>We have decided to conduct a sentiment analysis for every tweet, speculating that it might have predictive value for the misinformation score. We used the <em>sentimentr</em> algorithm, which is able to identify ‘valence shifters’ (e.g., <em>not</em> happy) and valence enhancers (e.g., <em>very</em> happy).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Sentiment Analysis ----</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Add sentiment analysis with "sentimentr" package</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>sentiments <span class="ot">&lt;-</span> sentimentr<span class="sc">::</span><span class="fu">sentiment</span>(<span class="at">text.var =</span> sentimentr<span class="sc">::</span><span class="fu">get_sentences</span>(tweets_features<span class="sc">$</span>text)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(element_id) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_sentiment =</span> <span class="fu">mean</span>(sentiment))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="do">### add the mean sentiment for every tweet</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span> </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sentiment_score =</span> sentiments<span class="sc">$</span>mean_sentiment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(tweets_features <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">select</span>(author_id, text, sentiment_score) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">tail</span>(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<colgroup>
+<col style="width: 8%">
+<col style="width: 78%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">author_id</th>
+<th style="text-align: left;">text</th>
+<th style="text-align: right;">sentiment_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">993956222</td>
+<td style="text-align: left;">No need to make this complicated. Folks just want a piece of the action https://t.co/bBSenInFkq</td>
+<td style="text-align: right;">0.1381465</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">993956222</td>
+<td style="text-align: left;">Justice Robert’s be sayin “whew”</td>
+<td style="text-align: right;">0.4082483</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">993956222</td>
+<td style="text-align: left;">I’m done you’ve taken enough of my time bye now</td>
+<td style="text-align: right;">-0.0721688</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="media-reliability" class="level4">
+<h4 class="anchored" data-anchor-id="media-reliability">Media Reliability</h4>
+<p>Many of the tweets we have retrieved contain URLs to news sources, and we thought this would be very relevant for the misinformation score.</p>
+<p>There are various website that scrutinize news sources and rank their bias and factuality. One of the most famous websites which does that is <a href="https://mediabiasfactcheck.com" class="uri">https://mediabiasfactcheck.com</a>.</p>
+<p>We have found a (database)[https://github.com/ramybaly/News-Media-Reliability] which summarizes the news websites listed in <a href="https://mediabiasfactcheck.com" class="uri">https://mediabiasfactcheck.com</a>. As you can see below, each website is categorized into the level of bias towards a certain political orientation, and the level of factuality of its published reports.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>media_reliability <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">"./data/media_reliability.tsv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(media_reliability <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(source_url_normalized, fact, bias) <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                <span class="fu">head</span>()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>             )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-sm table-striped">
+<thead>
+<tr class="header">
+<th style="text-align: left;">source_url_normalized</th>
+<th style="text-align: left;">fact</th>
+<th style="text-align: left;">bias</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">villagevoice.com</td>
+<td style="text-align: left;">high</td>
+<td style="text-align: left;">left</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">insideclimatenews.org</td>
+<td style="text-align: left;">high</td>
+<td style="text-align: left;">left-center</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fury.news</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">extreme-right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">now8news.com</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">center</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">constitution.com</td>
+<td style="text-align: left;">low</td>
+<td style="text-align: left;">extreme-right</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">freebeacon.com</td>
+<td style="text-align: left;">mixed</td>
+<td style="text-align: left;">right</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>We have extracted the URLs from the tweets and searched them in the database. If we found a match, we attached the factuality and bias scores to our dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Media Reliability features ----</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Read the 'media_reliability' dataframe and normalize the urls</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>media_reliability <span class="ot">&lt;-</span> media_reliability <span class="sc">|&gt;</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">url_name =</span> <span class="fu">str_extract</span>(source_url_normalized, <span class="at">pattern =</span> <span class="st">"[^.]+"</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Create new columns in the df to store the factuality and bias</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>tweets_features<span class="sc">$</span>url_fact <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>tweets_features<span class="sc">$</span>url_bias <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="do">### find the index of tweets with &gt;0 urls to iterate over them in the loop</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">which</span>(tweets_features<span class="sc">$</span>n_url <span class="sc">&gt;</span> <span class="dv">0</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="do">### run the loop</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> index) {</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pluck the url with purrr and normalize it</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  url_clean <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">pluck</span>(tweets_features<span class="sc">$</span>entities.urls, i, <span class="st">"display_url"</span>, <span class="dv">1</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>                <span class="fu">str_extract</span>(<span class="at">pattern =</span> <span class="st">"[^.]+"</span>)</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># fetch the factuality and bias metrics</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  fact <span class="ot">&lt;-</span> media_reliability<span class="sc">$</span>fact[media_reliability<span class="sc">$</span>url_name <span class="sc">==</span> url_clean]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  bias <span class="ot">&lt;-</span> media_reliability<span class="sc">$</span>bias[media_reliability<span class="sc">$</span>url_name <span class="sc">==</span> url_clean]</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if the values above are not empty, impute them into the dataframe</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(fact) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    tweets_features<span class="sc">$</span>url_fact[i] <span class="ot">&lt;-</span> fact</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    tweets_features<span class="sc">$</span>url_bias[i] <span class="ot">&lt;-</span> bias</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We have decided to convert the categories into integers to feed into our model. For the bias feature, positive integers indicate a bias towards right-wing views, while negative integers indicate a bias towards left-wing views. A similar procedure was conducted for the factuality categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="do">### mutate the variables to integers</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">url_bias =</span> <span class="fu">case_when</span>(url_bias <span class="sc">==</span> <span class="st">"left"</span> <span class="sc">~</span> <span class="st">"-2"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                              url_bias <span class="sc">==</span> <span class="st">"left-center"</span> <span class="sc">~</span> <span class="st">"-1"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                              url_bias <span class="sc">==</span> <span class="st">"center"</span> <span class="sc">~</span> <span class="st">"0"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                              url_bias <span class="sc">==</span> <span class="st">"right-center"</span> <span class="sc">~</span> <span class="st">"1"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                              url_bias <span class="sc">==</span> <span class="st">"right"</span> <span class="sc">~</span> <span class="st">"2"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                              url_bias <span class="sc">==</span> <span class="st">"extreme-right"</span> <span class="sc">~</span> <span class="st">"3"</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">url_fact =</span> <span class="fu">case_when</span>(url_fact <span class="sc">==</span> <span class="st">"high"</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>                              url_fact <span class="sc">==</span> <span class="st">"mixed"</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>                              url_fact <span class="sc">==</span> <span class="st">"low"</span> <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span>),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">url_bias =</span> <span class="fu">as.numeric</span>(url_bias),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">url_fact =</span> <span class="fu">as.numeric</span>(url_fact))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="dictionaries" class="level4">
+<h4 class="anchored" data-anchor-id="dictionaries">Dictionaries</h4>
+<p>Another set of features we added was based on topic dictionaries, thinking that the topic could be indicative of misinformation. We picked a set of dictionaries about culture, economy, institutions, and so on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(quanteda.dictionaries<span class="sc">::</span>data_dictionary_LaverGarry)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              Length Class       Mode     
+CULTURE        3     dictionary2 list     
+ECONOMY        3     dictionary2 list     
+ENVIRONMENT    2     dictionary2 list     
+GROUPS         2     dictionary2 list     
+INSTITUTIONS   3     dictionary2 list     
+LAW_AND_ORDER  2     dictionary2 list     
+RURAL         16     -none-      character
+URBAN          1     -none-      character
+VALUES         2     dictionary2 list     </code></pre>
+</div>
+</div>
+<p>We have generated scored for each tweet based on the dictionaries. We have also added an additional feature, ‘Sixltr’, which scores the tweets by the number of long words (6 letters and above) in the tweet, possibly indicative of the vocabulary used in the tweet.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Dictionary ----</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">### Use the liwcalike function to compute the dictionary simliarity scores</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dict <span class="ot">&lt;-</span> tweets_features<span class="sc">$</span>text <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  quanteda.dictionaries<span class="sc">::</span><span class="fu">liwcalike</span>(quanteda.dictionaries<span class="sc">::</span>data_dictionary_LaverGarry)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="do">### Bind the results with the main dataframe</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span> </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(dict <span class="sc">|&gt;</span> <span class="fu">select</span>(culture<span class="sc">:</span>values.liberal)) <span class="sc">|&gt;</span> </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(dict <span class="sc">|&gt;</span> <span class="fu">select</span>(Sixltr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="word-embeddings" class="level4">
+<h4 class="anchored" data-anchor-id="word-embeddings">Word Embeddings</h4>
+<p>We have also created word emeddings for the tweet with the most exposure for every user (we couldn’t do it for all tweets due to the extremely long running time).</p>
+<p>First, we cleaned the text from mentions, hashtags and URLs, and converted it to lower case.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Word Embeddings ----</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="do">### Because computing word embeddings takes ages on our machine,</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="do">### and because we still wanted to incorporate them, we decided to</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">### compute on the top tweet of each user.</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>most_exposure <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author_id) <span class="sc">|&gt;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice</span>(<span class="fu">which.max</span>(exposure)) <span class="sc">|&gt;</span> </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(author_id, text) <span class="sc">|&gt;</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="do">### Clean the text to feed into the transformer model:</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="do">### Removing @mentions, #hashtags, and "amp" html code</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>most_exposure <span class="ot">&lt;-</span> most_exposure <span class="sc">|&gt;</span> </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">clean_text =</span> <span class="fu">str_remove_all</span>(text, <span class="at">pattern =</span> <span class="st">"@</span><span class="sc">\\</span><span class="st">w+"</span>),</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">clean_text =</span> <span class="fu">str_remove_all</span>(clean_text, <span class="at">pattern =</span> <span class="st">"#</span><span class="sc">\\</span><span class="st">w+"</span>), </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">clean_text =</span> <span class="fu">str_remove_all</span>(clean_text, <span class="at">pattern =</span> <span class="st">"amp"</span>),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">clean_text =</span> <span class="fu">tolower</span>(clean_text))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After preparing the tweets, we created word embeddings for each of them. We used a special version of the BERT model which is specifically trained on tweets.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Compute the word embeddings and save them</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(most_exposure)) {</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>full_word_embeddings_decon <span class="ot">&lt;-</span> text<span class="sc">::</span><span class="fu">textEmbed</span>(most_exposure<span class="sc">$</span>clean_text[i],</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">contexts =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">model =</span> <span class="st">"cardiffnlp/twitter-roberta-base"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">decontexts =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">write_rds</span>(full_word_embeddings_decon, <span class="fu">paste0</span>(<span class="st">"./data/word_embeddings/"</span>,<span class="st">"we_"</span>,i,<span class="st">".rds"</span>))</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="fu">paste</span>(i,<span class="st">"_"</span>,<span class="fu">nrow</span>(most_exposure)))</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Read all the files and run a loop that combines them and attaches an identifaction row</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>files <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">dir_ls</span>(<span class="at">path =</span> <span class="st">"./data/word_embeddings/"</span>, <span class="at">glob =</span> <span class="st">"*rds"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(files)){</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  we_temp <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(files[i], id)[[<span class="st">"x"</span>]] <span class="sc">|&gt;</span> </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">row =</span> <span class="fu">paste</span>(<span class="fu">str_extract_all</span>(files[i], <span class="st">"[:digit:]"</span>)[[<span class="dv">1</span>]],<span class="at">sep=</span><span class="st">""</span>,<span class="at">collapse=</span><span class="st">""</span>))</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (i <span class="sc">==</span> <span class="dv">1</span>) {we <span class="ot">&lt;-</span> we_temp}</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">else</span> {we <span class="ot">&lt;-</span> we <span class="sc">|&gt;</span> <span class="fu">bind_rows</span>(we_temp)}</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>WE_most_exposure <span class="ot">&lt;-</span> we <span class="sc">|&gt;</span> </span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">row =</span> <span class="fu">as.numeric</span>(row)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(row)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Word embedding produced more than a thousand dimensions, so we reduced dimensions by using PCA. We selected the number of principle components by looking at a plot which showed the percentage of variances explained by each principal component.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>pca_embeds <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(WE_most_exposure <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>row))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>factoextra<span class="sc">::</span><span class="fu">fviz_eig</span>(pca_embeds) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We selected the top 6 PCs and merged them with the feature dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>selected_pcs <span class="ot">&lt;-</span> <span class="fu">select</span>(<span class="fu">as_tibble</span>(pca_embeds<span class="sc">$</span>x), PC1<span class="sc">:</span>PC6)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the engineered rds ----</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(tweets_features, <span class="at">file =</span> <span class="st">"./data/tweets_features.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summarizing-features" class="level4">
+<h4 class="anchored" data-anchor-id="summarizing-features">Summarizing Features</h4>
+<p>As of now, all features except the word embeddings were at the single tweet level. Because we needed to predict the misinformation score at the user level, we aggregated the features by user.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summarising features ----</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>tweets_features <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"./data/tweets_features.rds"</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Select the relevant columns and rename them</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> tweets_features <span class="sc">|&gt;</span> </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(author_id, </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>         <span class="st">"rt"</span> <span class="ot">=</span> public_metrics.retweet_count, </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>         <span class="st">"like"</span> <span class="ot">=</span> public_metrics.like_count, </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>         n_url,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>         url_fact,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>         url_bias,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>         n_mention,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>         n_hashtag,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>         n_entities,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>         n_words,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>         sentiment_score,</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>         culture<span class="sc">:</span>Sixltr) <span class="sc">|&gt;</span> </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate statistics - Mean, Median, SD, Kurtosis, Skewness for every metric</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="do">### note: id's without any rt\reply\like\quote create NaN and NA's in some statistics</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="do">### note: for now, we are using mean only for simplicity's sake</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(author_id) <span class="sc">|&gt;</span> </span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(rt<span class="sc">:</span>sixltr, <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> <span class="er">~</span><span class="fu">mean</span>(.x, <span class="at">na.rm=</span>T)))</span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Replace NAs with 0s in the factuality and bias scores which were sometimes NA</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(url_fact_mean<span class="sc">:</span>url_bias_mean, <span class="sc">~</span><span class="fu">replace</span>(., <span class="fu">is.nan</span>(.), <span class="dv">0</span>))) </span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Finally, combine the PCs with the metric data</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="do">### Merge the word embedding PCs with the main df</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> </span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_cols</span>(selected_pcs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After finishing the feature engineering, we looked at the distributions of the features to do some extra fine-tuning, such as: conducting transformations, removing correlated features, and removing features with little variance.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual examination ----</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="do">## examine the histograms of the variables, perhaps some should be dropped or transformed</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>histograms <span class="ot">&lt;-</span> metric_data_raw <span class="sc">|&gt;</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> rt_mean<span class="sc">:</span>sixltr_mean, <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>histograms <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="do">## After the visual examination we have decided to drop </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="do">## "culture_sport_mean" and "law_and_order_law_liberal_mean" due to very low variance</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span><span class="fu">c</span>(culture_sport_mean, law_and_order_law_liberal_mean))</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="do">## Furthermore, we decided to log-transform "rt_mean" and "like_mean"</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="do">## due to extreme values</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rt_mean =</span> <span class="fu">ifelse</span>(rt_mean <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">yes =</span> <span class="fu">log</span>(rt_mean), <span class="at">no =</span> <span class="fu">log</span>(rt_mean <span class="sc">+</span> <span class="fl">0.001</span>)),</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">like_mean =</span> <span class="fu">ifelse</span>(like_mean <span class="sc">!=</span> <span class="dv">0</span>, <span class="at">yes =</span> <span class="fu">log</span>(like_mean), <span class="at">no =</span> <span class="fu">log</span>(like_mean <span class="sc">+</span> <span class="fl">0.001</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>After the transformation, no. of likes and no. of retweets are much more informative, as we can see:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>histograms <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> rt_mean<span class="sc">:</span>sixltr_mean, <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>histograms <span class="sc">|&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(metric <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"rt_mean"</span>,<span class="st">"like_mean"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">100</span>) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric, <span class="at">scales =</span> <span class="st">"free"</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>We have also looked at a correlation matrix in order to remove features with high collinearity. Initially, we had no. of replies and no. of quotes in the model and removed them due to high collinearity with no. of likes.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Examine corrplot</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> <span class="fu">cor</span>(<span class="fu">as.matrix</span>(metric_data <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>author_id)))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>corrplot<span class="sc">::</span><span class="fu">corrplot</span>(cor, <span class="at">tl.cex =</span> <span class="dv">1</span>,<span class="at">type =</span> <span class="st">"lower"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save final product</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(<span class="at">x =</span> metric_data, <span class="at">file =</span> <span class="st">"./data/metric_data.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="modeling" class="level3">
+<h3 class="anchored" data-anchor-id="modeling">Modeling</h3>
+<p>We have chosen to use Random Forest as the method by which we will build our model, because it does not require strict assumptions regarding the data (contrary to linear regression), and the hyperparameter tuning is fairy simple compared to other tree methods (such as XGBoost which has many hyperparameters).</p>
+<p>We have decided to train two models, one is based on the simpler features we generated that do not include any NLP tehcniques, and one that is based on advanced methods. This was done in order to see the contribution of advanced NLP methods such as word embeddings and sentiment analysis on the model’s prediction ability.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the train data</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>train <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/train.csv"</span>, <span class="at">col_types =</span> <span class="st">"c"</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the feature engineered data and filter for train IDs only</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>metric_data <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"./data/metric_data.rds"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(author_id <span class="sc">%in%</span> train<span class="sc">$</span>id) <span class="sc">|&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(train, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"author_id"</span> <span class="ot">=</span> <span class="st">"id"</span>))</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Define custom evaluation metric, in case of this competetion: Pearson's R</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>customSummary <span class="ot">&lt;-</span> <span class="cf">function</span> (data, <span class="at">lev =</span> <span class="cn">NULL</span>, <span class="at">model =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> <span class="fu">cor</span>(data<span class="sc">$</span>obs, data<span class="sc">$</span>pred)  </span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(out) <span class="ot">&lt;-</span> <span class="st">"PearsonR"</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  out</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="basic-features-random-forest-model" class="level4">
+<h4 class="anchored" data-anchor-id="basic-features-random-forest-model">Basic Features Random Forest Model</h4>
+<section id="training" class="level5">
+<h5 class="anchored" data-anchor-id="training">Training</h5>
+<p>In the code chunk below, we trained the model on the training dataset. We have included only the simpler features that we have generated (e.g., no. of likes, no. of entities) without any NLP techniques. We have used a 10-fold cross validation with the custom summary function we defined as the evaluation metric.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter "basic" columns</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>training <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> <span class="fu">select</span>(rt_mean, like_mean, n_url_mean, n_mention_mean, </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>                                  n_hashtag_mean, n_entities_mean, n_words_mean,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                                  score)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Hyperparameter tuning grid</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>tg <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">list</span>(<span class="at">mtry =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="fu">ncol</span>(training) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="dv">2</span>)))</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Define train control</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>tc <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">summaryFunction =</span> customSummary,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>                   <span class="at">verboseIter =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># train</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>model_basic <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>  score <span class="sc">~</span> .,</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> training,</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>),</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> tc,</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">tuneGrid =</span> tg,</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"PearsonR"</span>,</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"rf"</span></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># save model</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(model_basic, <span class="st">"BASIC_RF_MODEL_FINAL.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-features-random-forest-model" class="level4">
+<h4 class="anchored" data-anchor-id="advanced-features-random-forest-model">Advanced Features Random Forest Model</h4>
+<section id="training-1" class="level5">
+<h5 class="anchored" data-anchor-id="training-1">Training</h5>
+<p>For the advanced model, we have used the same training methods, but added the advanced features as well.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out the author id</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>training <span class="ot">&lt;-</span> metric_data <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>author_id)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define Hyperparameter tuning grid</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>tg <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="fu">list</span>(<span class="at">mtry =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">3</span>, <span class="at">to =</span> <span class="fu">ncol</span>(training) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="dv">2</span>)))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define train control</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>tc <span class="ot">&lt;-</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">"cv"</span>, </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">number =</span> <span class="dv">10</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">summaryFunction =</span> customSummary,</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">verboseIter =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co"># train</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> caret<span class="sc">::</span><span class="fu">train</span>(</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  score <span class="sc">~</span> .,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> training,</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"scale"</span>),</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">trControl =</span> tc,</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">tuneGrid =</span> tg,</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric =</span> <span class="st">"PearsonR"</span>,</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">"rf"</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co"># save model</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a><span class="fu">write_rds</span>(model, <span class="st">"FULL_RF_MODEL_FINAL.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="model-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="model-comparison">Model Comparison</h4>
+<section id="tuning-proccess" class="level5">
+<h5 class="anchored" data-anchor-id="tuning-proccess">Tuning Proccess</h5>
+<p>When comparing the models we can see that the full model with the NLP-based features has a large advantage over the basic models.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> (model_basic<span class="sc">$</span>results <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">model_type =</span> <span class="st">"basic"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(model<span class="sc">$</span>results <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">model_type =</span> <span class="st">"full"</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> mtry, <span class="at">y =</span> PearsonR, <span class="at">color =</span> model_type, <span class="at">group =</span> model_type)) <span class="sc">+</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Model Comparison"</span>,</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Full (NLP methods included) vs. Basic (No NLP methods)"</span>,</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Cross-Validated Pearson's R"</span>,</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"No. of Randomly Selected Predictors Hyperparameter"</span>) <span class="sc">+</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="feature-importance-with-shap-values" class="level5">
+<h5 class="anchored" data-anchor-id="feature-importance-with-shap-values">Feature Importance with SHAP values</h5>
+<p>We have also decided to look at feature importance to see which features were most significant. We decided to employ SHAP values for this purpose as they can offer insight into our ‘black box’ with techniques derived from game-theory. The plot below shows the feature importance of our model, meaning, the average impact that each feature had on the outcome of our model.</p>
+<p>As we can see in the plot below, the most important features were a product of the advanced NLP methods we have used (e.g., Word embedding PCs, URL bias and the economy state dictionary). But, nonetheless, simpler features definitely played a part as well, as we can see that several of them are ranked quite high (e.g.&nbsp;no. of entities, no. of retweets).</p>
+<p>In conclusion, We can see that advanced methods were a significant addition to the model’s predictive ability.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># we used the following package for visualization:</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github('ModelOriented/treeshap')</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(treeshap)</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>model_unified <span class="ot">&lt;-</span> <span class="fu">randomForest.unify</span>(model<span class="sc">$</span>finalModel,</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>                                    metric_data <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>author_id))</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>treeshap_res <span class="ot">&lt;-</span> <span class="fu">treeshap</span>(model_unified, metric_data <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="sc">!</span>author_id))</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_feature_importance</span>(treeshap_res, <span class="at">max_vars =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="prediction-breakdown-with-shap-values" class="level5">
+<h5 class="anchored" data-anchor-id="prediction-breakdown-with-shap-values">Prediction Breakdown with SHAP values</h5>
+<p>Just as a bonus, before we move into predictions, we can also utilize the SHAP values to gain insight into how individual predictions were made. Below you can see 4 waterfall plots that illustrate how 4 individiual observations were predicted based on the values of their features.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">plot_contribution</span>(treeshap_res, <span class="at">obs =</span> <span class="dv">1</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">plot_contribution</span>(treeshap_res, <span class="at">obs =</span> <span class="dv">5</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">plot_contribution</span>(treeshap_res, <span class="at">obs =</span> <span class="dv">10</span>)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">plot_contribution</span>(treeshap_res, <span class="at">obs =</span> <span class="dv">15</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>gridExtra<span class="sc">::</span><span class="fu">grid.arrange</span>(p1,p2,p3,p4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="report_files/figure-html/unnamed-chunk-32-1.png" class="img-fluid" width="1344"></p>
+</div>
+</div>
+</section>
+<section id="predictions" class="level5">
+<h5 class="anchored" data-anchor-id="predictions">Predictions</h5>
+<p>Finally, after exploring the model for a bit, we used the advanced trained model to predict misinformation scores for the test data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the test data</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/test.csv"</span>, <span class="at">col_types =</span> <span class="st">"c"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the feature engineered data and filter for test IDs only</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>testing <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"./data/metric_data.rds"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(author_id <span class="sc">%in%</span> test<span class="sc">$</span>id)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>testing<span class="sc">$</span>pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">newdata =</span> testing)</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>submission <span class="ot">&lt;-</span> test <span class="sc">|&gt;</span> </span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(testing <span class="sc">|&gt;</span> <span class="fu">select</span>(author_id, pred), <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span> <span class="ot">=</span> <span class="st">"author_id"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">"score"</span> <span class="ot">=</span> pred)</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="co"># replacing the NAs with the median for users who didn't have any tweets</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>submission<span class="sc">$</span>score[<span class="fu">is.na</span>(submission<span class="sc">$</span>score)] <span class="ot">&lt;-</span> <span class="fu">median</span>(submission<span class="sc">$</span>score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="co"># replacing the id for indices, for Kaggle</span></span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>submission <span class="ot">&lt;-</span> submission <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">n</span>())</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="co"># writing submission</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(submission, <span class="st">"./submissions/submission.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
